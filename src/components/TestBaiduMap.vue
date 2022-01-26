@@ -7,7 +7,8 @@
         <bm-navigation type="BMAP_NAVIGATION_CONTROL_ZOOM" anchor="BMAP_ANCHOR_BOTTOM_LEFT"
                        :offset="navOffset"></bm-navigation>
         <!--动态添加的覆盖物-->
-        <bm-marker v-for="(item, index) in markerCollection" :position="item.position" :key="index" @click="infoWindowOpen(item)">
+        <bm-marker v-for="(item, index) in markerCollection" :position="item.position" :key="index"
+                   @click="infoWindowOpen(item)" :icon="markerIcon">
             <bm-info-window :show="item.infoWindowShow" @close="infoWindowClose(item)">{{ item.infoText }}</bm-info-window>
         </bm-marker>
         <bm-driving v-if="drivingSearchShow" :location="walkStart" :start="walkStart" :end="walkEnd" :auto-viewport="true"
@@ -38,6 +39,7 @@
                 center: { lng: 0, lat: 0 }, //中心坐标点
                 zoom: 3, //缩放等级
                 navOffset: { width: 20, height: 60 }, //缩放控件偏移量
+                markerIcon: { url: require('@/assets/img/icon-location-red.png'), size: { width: 40, height: 40 } }, //标注自定义图标
                 markerCollection: [], //标注点数组
                 walkStart: { lng: 0, lat: 0 }, //行进起点
                 walkEnd: { lng: 0, lat: 0 }, //行进终点
